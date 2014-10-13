@@ -20,7 +20,6 @@ Element for capturing camera stream and use it to take pictures.
             video = document.querySelector('#video');
         
         camera.addEventListener('start', function (evt) {
-            console.log(evt);
             video.src = evt.detail;
         });
         start.addEventListener('click', camera.start.bind(camera));

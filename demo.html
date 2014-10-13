@@ -29,7 +29,6 @@
         var video = document.querySelector('#video');
 		
 		camera.addEventListener('start', function (evt) {
-			console.log(evt.detail);
 			video.src = evt.detail;
 		});
 
