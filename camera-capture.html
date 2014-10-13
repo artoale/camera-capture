@@ -1,0 +1,127 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+Element for capturing camera stream and use it to take pictures.
+
+##### Example
+
+    <camera-capture autocapture></camera-capture>
+
+##### Example with js
+
+    <button id="start">Start capturing</button>
+    <button id="stop">Stop capturing</button>
+    <video src="" id="video" autoplay></video>
+    <camera-capture id="camera" autocapture></camera-capture>
+    <script>
+        var camera = document.querySelector('#camera'),
+            start = document.querySelector('#start'),
+            stop = document.querySelector('#stop'),
+            video = document.querySelector('#video');
+        
+        camera.addEventListener('start', function (evt) {
+            console.log(evt);
+            video.src = evt.detail;
+        });
+        start.addEventListener('click', camera.start.bind(camera));
+        stop.addEventListener('click', camera.stop.bind(camera));
+        
+    </script>
+
+
+
+@element camera-capture
+@blurb Element for capturing camera stream and use it to take pictures.
+@status alpha
+@homepage http://artoale.github.io/camera-capture
+-->
+<polymer-element name="camera-capture" attributes="out autocapture">
+    <script>
+    (function() {
+        'use strict';
+        Polymer({
+            isStreaming: false,
+            created: function() {
+                this.autocapture = false;
+            },
+            ready: function() {
+                if (this.autocapture) {
+                    this.start();
+                }
+            },
+
+            /**
+             * The `autocapture` attribute specifies if camera capturing should
+             * start automatically or not.
+             *
+             * @attribute autocapture
+             * @type boolean
+             * @default false
+             */
+           
+            /**
+             * The `start` event is fired when, after having permission granted by the user,
+             * camera caputuring begins.
+             *
+             * @event start
+             * @param {string} detail The objectURL blob of the current stream.
+             *
+             */
+            
+            /**
+             * The `error` event is fired en error occurs, e.g. if the user doesn't 
+             * grant permission to use the camera.
+             *
+             * @event error
+             * @param {Object} detail The error occurred when trying to capture 
+             *
+             */
+
+            /**
+             * Start capturing from the camera
+             *
+             * @method start
+             * @return {boolean} false if camera was already capturing
+             */
+            start: function() {
+                if (this.isStreaming) {
+                    return false;
+                }
+
+                navigator.getMedia = (navigator.getUserMedia ||
+                    navigator.webkitGetUserMedia ||
+                    navigator.mozGetUserMedia ||
+                    navigator.msGetUserMedia);
+
+                navigator.getMedia({
+                        video: true,
+                        audio: false
+                    },
+                    function(stream) {
+                        this._stream = stream;
+                        this.isStreaming = true;
+                        this.out = window.URL.createObjectURL(stream);
+                        this.fire('start', this.out);
+                    }.bind(this),
+                    function(err) {
+                        this.fire('error', err);
+                    }.bind(this)
+                );
+                return true;
+            },
+
+            /**
+             * Stop the camera from streaming
+             *
+             * @method stop
+             * @return {boolean} The camera stream to interrupt
+             */
+            stop: function() {
+                this.isStreaming = false;
+                this._stream.stop();
+            }
+        });
+    }());
+    </script>
+
+</polymer-element>

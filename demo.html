@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>camera-capture Demo</title>
+
+    <script src="../platform/platform.js"></script>
+    <link rel="import" href="camera-capture.html">
+	<style type="text/css">
+		#video {
+			transform: rotateY(-180deg);
+		}
+	</style>
+</head>
+
+<body unresolved>
+	<button id="start">Start capturing</button>
+    <button id="stop">Stop capturing</button>
+    <video src="" id="video" autoplay></video>
+    <camera-capture id="camera" autocapture></camera-capture>
+    <script>
+    
+    window.addEventListener('load', function() {
+    	'use strict';
+        var camera = document.querySelector('#camera');
+        var start = document.querySelector('#start');
+        var stop = document.querySelector('#stop');
+        var video = document.querySelector('#video');
+		
+		camera.addEventListener('start', function (evt) {
+			console.log(evt.detail);
+			video.src = evt.detail;
+		});
+
+		camera.addEventListener('error', function (evt) {
+			console.log(evt);
+		});
+		start.addEventListener('click', camera.start.bind(camera));
+		stop.addEventListener('click', camera.stop.bind(camera));
+		
+
+    });
+    </script>
+</body>
+
+</html>
