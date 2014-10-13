@@ -4,7 +4,8 @@
   "keywords": [
     "polymer",
     "web-components",
-    "web components"
+    "web components",
+    "camera"
   ],
   "main": "camera-capture.html",
   "dependencies": {
