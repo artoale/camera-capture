@@ -1,0 +1,17 @@
+{
+  "name": "camera-capture",
+  "version": "0.1.0",
+  "keywords": [
+    "polymer",
+    "web-components",
+    "web components",
+    "camera"
+  ],
+  "main": "camera-capture.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^0.4.0"
+  },
+  "devDependencies": {
+    "polymer-test-tools": "Polymer/polymer-test-tools#^0.4.0"
+  }
+}

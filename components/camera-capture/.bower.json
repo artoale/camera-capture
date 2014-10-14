@@ -1,0 +1,27 @@
+{
+  "name": "camera-capture",
+  "keywords": [
+    "polymer",
+    "web-components",
+    "web components",
+    "camera"
+  ],
+  "main": "camera-capture.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^0.4.0"
+  },
+  "devDependencies": {
+    "polymer-test-tools": "Polymer/polymer-test-tools#^0.4.0"
+  },
+  "homepage": "https://github.com/artoale/camera-capture",
+  "_release": "17becbefd2",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "17becbefd27eb803988b6b7b9acfd9a5015aed87"
+  },
+  "_source": "git://github.com/artoale/camera-capture.git",
+  "_target": "master",
+  "_originalSource": "artoale/camera-capture",
+  "_direct": true
+}
